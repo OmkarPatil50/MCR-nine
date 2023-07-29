@@ -131,18 +131,67 @@
   cursor: pointer;
 }
 
-.modal-save-btn {
+.add-new-playlist-btn {
   box-sizing: border-box;
-  margin: 10px;
-  padding: 7.5px 15px;
-  background: none;
   border: none;
+  background: none;
   background-color: var(--primary-color);
-  color: var(--white-color);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--yt-spec-text-primary);
+  font-size: 18px;
   cursor: pointer;
-  border: 1px solid var(--primary-color);
+  margin: 10px;
 }
 
-.modal-save-btn:hover {
-  opacity: 0.45;
+.add-new-playlist-btn i {
+  margin: 10px;
+  border: none;
+  align-self: center;
+}
+
+.playlist-list {
+  width: 100%;
+}
+
+.playlist-list-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  margin: 5px 0;
+  border-bottom: 1px solid var(--primary-color);
+}
+
+.playlist-list-item button:hover {
+  background-color: var(--primary-color);
+  color: var(--yt-spec-text-primary);
+  cursor: pointer;
+}
+
+.playlist-list-item button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px;
+}
+
+.list-heading {
+  color: var(--primary-color);
+}
+
+.notes-list {
+  width: 100%;
+}
+
+.notes-list-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.notes-list-item-content {
+  font-size: 18px;
 }

@@ -84,7 +84,22 @@ function SingleVideo() {
             {addToPlayList.showPlaylistBox && (
               <div className="modal-page">
                 <div className="modal-box">
+                  <header className="modal-header">
+                    <h3 className="modal-heading">Add to Playlist</h3>
+                    <i
+                      className="fa-solid fa-xmark"
+                      onClick={() => {
+                        setAddToPlaylist(() => ({
+                          ...addToPlayList,
+                          showPlaylistBox: false,
+                          name: "",
+                          desc: "",
+                        }));
+                      }}
+                    ></i>
+                  </header>
                   <button
+                    className="add-new-playlist-btn"
                     onClick={() =>
                       setAddToPlaylist(() => ({
                         ...addToPlayList,
@@ -170,10 +185,12 @@ function SingleVideo() {
                       </div>
                     </div>
                   )}
-                  {state.playLists.length
-                    ? state.playLists?.map((playlist) => {
+                  {state.playLists.length ? (
+                    <ul className="playlist-list">
+                      <p className="list-heading">Select Playlist</p>
+                      {state.playLists?.map((playlist) => {
                         return (
-                          <li>
+                          <li className="playlist-list-item">
                             <button
                               onClick={() =>
                                 dispatch({
@@ -192,8 +209,13 @@ function SingleVideo() {
                                 color: playlist.videos.some(
                                   (video) => video._id === _id
                                 )
-                                  ? "Blue"
-                                  : "red",
+                                  ? "#f7f7f7"
+                                  : "#202020",
+                                backgroundColor: playlist.videos.some(
+                                  (video) => video._id === _id
+                                )
+                                  ? "#202020"
+                                  : "#f7f7f7",
                               }}
                             >
                               {playlist.name}
@@ -210,8 +232,11 @@ function SingleVideo() {
                             </button>
                           </li>
                         );
-                      })
-                    : "No Playlists Found"}
+                      })}
+                    </ul>
+                  ) : (
+                    "No Playlists Found"
+                  )}
                 </div>
               </div>
             )}
@@ -227,35 +252,57 @@ function SingleVideo() {
               <i className="fa-solid fa-pen-to-square"></i>
             </button>
             {notesWindow.showNotesWindow && (
-              <div className="notes-modal">
-                <p>Enter Notes</p>
-                <textarea
-                  name="notes"
-                  placeholder="Enter Notes...!"
-                  required
-                  onChange={(event) => {
-                    setNotesWindow(() => ({
-                      ...notesWindow,
-                      noteText: event.target.value,
-                    }));
-                  }}
-                ></textarea>
-                <button
-                  type="submit"
-                  onClick={() => {
-                    setNotesWindow(() => ({
-                      ...notesWindow,
-                      showNotesWindow: false,
-                      noteText: "",
-                    }));
-                    dispatch({
-                      type: "ADD_NOTE_TO_VIDEO",
-                      payload: { text: notesWindow.noteText, _id: _id },
-                    });
-                  }}
-                >
-                  Add Note
-                </button>
+              <div className="modal-page">
+                <div className="modal-box">
+                  <header className="modal-header">
+                    <h3 className="modal-heading">Enter Notes</h3>
+                    <i
+                      className="fa-solid fa-xmark"
+                      onClick={() => {
+                        setNotesWindow(() => ({
+                          ...notesWindow,
+                          showNotesWindow: false,
+                          noteText: "",
+                        }));
+                      }}
+                    ></i>
+                  </header>
+
+                  <label htmlFor="enter-note">
+                    <textarea
+                      cols={40}
+                      rows={4}
+                      name="notes"
+                      placeholder="Enter Notes...!"
+                      required
+                      onChange={(event) => {
+                        setNotesWindow(() => ({
+                          ...notesWindow,
+                          noteText: event.target.value,
+                        }));
+                      }}
+                    ></textarea>
+                  </label>
+                  <button
+                    type="submit"
+                    className="modal-save-btn"
+                    onClick={() => {
+                      if (notesWindow.noteText) {
+                        setNotesWindow(() => ({
+                          ...notesWindow,
+                          showNotesWindow: false,
+                          noteText: "",
+                        }));
+                        dispatch({
+                          type: "ADD_NOTE_TO_VIDEO",
+                          payload: { text: notesWindow.noteText, _id: _id },
+                        });
+                      }
+                    }}
+                  >
+                    Add Note
+                  </button>
+                </div>
               </div>
             )}
           </div>
@@ -267,35 +314,39 @@ function SingleVideo() {
               state.singleVideoData.notes.map((note, index) => {
                 return (
                   <div>
-                    <li key={index}>
-                      {note}
-                      <button
-                        onClick={() => {
-                          setEditWindow(() => ({
-                            ...editWindow,
-                            showEditWindow: !editWindow.showEditWindow,
-                          }));
-                          dispatch({
-                            type: "UPDATE_EDIT_NOTE_DATA",
-                            payload: note,
-                          });
-                        }}
-                      >
-                        <i className="fa-solid fa-pencil"></i>
-                      </button>{" "}
-                      <button
-                        onClick={() => {
-                          dispatch({
-                            type: "DELETE_NOTE",
-                            payload: {
-                              note: note,
-                              _id: _id,
-                            },
-                          });
-                        }}
-                      >
-                        <i className="fa-solid fa-xmark"></i>
-                      </button>
+                    <li key={index} className="notes-list-item">
+                      <p className="notes-list-item-content">{note}</p>
+                      <div className="single-video-tools">
+                        <button
+                          className="single-video-tools-button"
+                          onClick={() => {
+                            setEditWindow(() => ({
+                              ...editWindow,
+                              showEditWindow: !editWindow.showEditWindow,
+                            }));
+                            dispatch({
+                              type: "UPDATE_EDIT_NOTE_DATA",
+                              payload: note,
+                            });
+                          }}
+                        >
+                          <i className="fa-solid fa-pencil"></i>
+                        </button>{" "}
+                        <button
+                          className="single-video-tools-button"
+                          onClick={() => {
+                            dispatch({
+                              type: "DELETE_NOTE",
+                              payload: {
+                                note: note,
+                                _id: _id,
+                              },
+                            });
+                          }}
+                        >
+                          <i className="fa-solid fa-xmark"></i>
+                        </button>
+                      </div>
                     </li>
                   </div>
                 );
@@ -303,39 +354,59 @@ function SingleVideo() {
           </ul>
         </div>
         {editWindow.showEditWindow && (
-          <div className="edit-window">
-            <p>Update Note</p>
-            <textarea
-              name="notes"
-              required
-              defaultValue={state.editNoteData}
-              onChange={(event) => {
-                setEditWindow(() => ({
-                  ...editWindow,
-                  editText: event.target.value,
-                }));
-              }}
-            ></textarea>
-            <button
-              type="submit"
-              onClick={() => {
-                setEditWindow(() => ({
-                  ...editWindow,
-                  showEditWindow: false,
-                  editTextText: "",
-                }));
-                dispatch({
-                  type: "EDIT_NOTE",
-                  payload: {
-                    text: editWindow.editText,
-                    originalText: state.editNoteData,
-                    _id: _id,
-                  },
-                });
-              }}
-            >
-              Update
-            </button>
+          <div className="modal-page">
+            <div className="modal-box">
+              <header className="modal-header">
+                <h3 className="modal-heading">Edit Note</h3>
+                <i
+                  className="fa-solid fa-xmark"
+                  onClick={() => {
+                    setEditWindow(() => ({
+                      ...editWindow,
+                      editText: "",
+                      showEditWindow: false,
+                    }));
+                  }}
+                ></i>
+              </header>
+
+              <label htmlFor="edit-note">
+                <textarea
+                  cols={40}
+                  rows={4}
+                  name="notes"
+                  required
+                  defaultValue={state.editNoteData}
+                  onChange={(event) => {
+                    setEditWindow(() => ({
+                      ...editWindow,
+                      editText: event.target.value,
+                    }));
+                  }}
+                ></textarea>
+              </label>
+              <button
+                type="submit"
+                className="modal-save-btn"
+                onClick={() => {
+                  setEditWindow(() => ({
+                    ...editWindow,
+                    showEditWindow: false,
+                    editTextText: "",
+                  }));
+                  dispatch({
+                    type: "EDIT_NOTE",
+                    payload: {
+                      text: editWindow.editText,
+                      originalText: state.editNoteData,
+                      _id: _id,
+                    },
+                  });
+                }}
+              >
+                Update
+              </button>
+            </div>
           </div>
         )}
       </div>
