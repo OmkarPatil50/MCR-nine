@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../..";
+import "./SingleVideo.css";
 
 function SingleVideo() {
   const { videoID } = useParams();
@@ -34,6 +35,7 @@ function SingleVideo() {
       <div className="video-page">
         <div className="video-container">
           <iframe
+            className="vidoe-main"
             src={src}
             title="YouTube video player"
             frameBorder="0"
@@ -54,6 +56,7 @@ function SingleVideo() {
                 onClick={() =>
                   dispatch({ type: "REMOVE_FROM_WATCH_LATER", payload: _id })
                 }
+                className="single-video-tools-button"
               >
                 <i className="fa-solid fa-clock"></i>
               </button>
@@ -62,11 +65,13 @@ function SingleVideo() {
                 onClick={() =>
                   dispatch({ type: "ADD_TO_WATCH_LATER", payload: _id })
                 }
+                className="single-video-tools-button"
               >
                 <i className="fa-solid fa-clock-rotate-left"></i>
               </button>
             )}
             <button
+              className="single-video-tools-button"
               onClick={() => {
                 setAddToPlaylist((event) => ({
                   ...addToPlayList,
@@ -77,118 +82,141 @@ function SingleVideo() {
               <i className="fa-solid fa-sliders"></i>
             </button>
             {addToPlayList.showPlaylistBox && (
-              <div className="playlist-modal">
-                <button
-                  onClick={() =>
-                    setAddToPlaylist(() => ({
-                      ...addToPlayList,
-                      showAddNewPlayListBox:
-                        !addToPlayList.showAddNewPlayListBox,
-                    }))
-                  }
-                >
-                  <i className="fa-solid fa-plus"></i>
-                  Add New Playlist
-                </button>
-                {addToPlayList.showAddNewPlayListBox && (
-                  <div className="add-new-playlist-box">
-                    <label htmlFor="playlist-name">
-                      <textarea
-                        name="playlist-name"
-                        value={addToPlayList.name}
-                        placeholder="Enter title of your playlist"
-                        required
-                        onChange={(event) => {
-                          setAddToPlaylist(() => ({
-                            ...addToPlayList,
-                            name: event.target.value,
-                          }));
-                        }}
-                      ></textarea>
-                    </label>
-                    <label htmlFor="playlist-desc">
-                      <textarea
-                        name="playlist-desc"
-                        value={addToPlayList.desc}
-                        placeholder="Write a Description"
-                        required
-                        onChange={(event) => {
-                          setAddToPlaylist(() => ({
-                            ...addToPlayList,
-                            desc: event.target.value,
-                          }));
-                        }}
-                      ></textarea>
-                    </label>
-                    <button
-                      className="btn-new-playlist"
-                      onClick={() => {
-                        if (addToPlayList.name) {
-                          dispatch({
-                            type: "ADD_NEW_PLAYLIST",
-                            payload: {
-                              name: addToPlayList.name,
-                              desc: addToPlayList.desc,
-                            },
-                          });
-                          setAddToPlaylist(() => ({
-                            ...addToPlayList,
-                            showAddNewPlayListBox: false,
-                            name: "",
-                            desc: "",
-                          }));
-                        }
-                      }}
-                    >
-                      Create New Playlist
-                    </button>
-                  </div>
-                )}
-                {state.playLists.length
-                  ? state.playLists?.map((playlist) => {
-                      return (
-                        <li>
-                          <button
-                            onClick={() =>
+              <div className="modal-page">
+                <div className="modal-box">
+                  <button
+                    onClick={() =>
+                      setAddToPlaylist(() => ({
+                        ...addToPlayList,
+                        showAddNewPlayListBox:
+                          !addToPlayList.showAddNewPlayListBox,
+                      }))
+                    }
+                  >
+                    <i className="fa-solid fa-plus"></i>
+                    Add New Playlist
+                  </button>
+                  {addToPlayList.showAddNewPlayListBox && (
+                    <div className="modal-page">
+                      <div className="modal-box">
+                        <header className="modal-header">
+                          <h3 className="modal-heading">Create New Playlist</h3>
+                          <i
+                            className="fa-solid fa-xmark"
+                            onClick={() => {
+                              setAddToPlaylist(() => ({
+                                ...addToPlayList,
+                                showAddNewPlayListBox: false,
+                                name: "",
+                                desc: "",
+                              }));
+                            }}
+                          ></i>
+                        </header>
+                        <label htmlFor="playlist-name">
+                          <textarea
+                            cols={40}
+                            rows={2}
+                            name="playlist-name"
+                            value={addToPlayList.name}
+                            placeholder="Enter title of your playlist"
+                            required
+                            onChange={(event) => {
+                              setAddToPlaylist(() => ({
+                                ...addToPlayList,
+                                name: event.target.value,
+                              }));
+                            }}
+                          ></textarea>
+                        </label>
+                        <label htmlFor="playlist-desc">
+                          <textarea
+                            cols={40}
+                            rows={5}
+                            name="playlist-desc"
+                            value={addToPlayList.desc}
+                            placeholder="Write a Description"
+                            required
+                            onChange={(event) => {
+                              setAddToPlaylist(() => ({
+                                ...addToPlayList,
+                                desc: event.target.value,
+                              }));
+                            }}
+                          ></textarea>
+                        </label>
+                        <button
+                          className="modal-save-btn"
+                          onClick={() => {
+                            if (addToPlayList.name) {
                               dispatch({
-                                type: playlist.videos.some(
+                                type: "ADD_NEW_PLAYLIST",
+                                payload: {
+                                  name: addToPlayList.name,
+                                  desc: addToPlayList.desc,
+                                },
+                              });
+                              setAddToPlaylist(() => ({
+                                ...addToPlayList,
+                                showAddNewPlayListBox: false,
+                                name: "",
+                                desc: "",
+                              }));
+                            }
+                          }}
+                        >
+                          Create New Playlist
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                  {state.playLists.length
+                    ? state.playLists?.map((playlist) => {
+                        return (
+                          <li>
+                            <button
+                              onClick={() =>
+                                dispatch({
+                                  type: playlist.videos.some(
+                                    (video) => video._id === _id
+                                  )
+                                    ? "REMOVE_FROM_PLAYLIST"
+                                    : "ADD_TO_PLAYLIST",
+                                  payload: {
+                                    _id: _id,
+                                    playListName: playlist.name,
+                                  },
+                                })
+                              }
+                              style={{
+                                color: playlist.videos.some(
                                   (video) => video._id === _id
                                 )
-                                  ? "REMOVE_FROM_PLAYLIST"
-                                  : "ADD_TO_PLAYLIST",
-                                payload: {
-                                  _id: _id,
-                                  playListName: playlist.name,
-                                },
-                              })
-                            }
-                            style={{
-                              color: playlist.videos.some(
-                                (video) => video._id === _id
-                              )
-                                ? "Blue"
-                                : "red",
-                            }}
-                          >
-                            {playlist.name}
-                          </button>
-                          <button
-                            onClick={() =>
-                              dispatch({
-                                type: "DELETE_PLAYLIST",
-                                payload: playlist.name,
-                              })
-                            }
-                          >
-                            Delete
-                          </button>
-                        </li>
-                      );
-                    })
-                  : "No Playlists Found"}
+                                  ? "Blue"
+                                  : "red",
+                              }}
+                            >
+                              {playlist.name}
+                            </button>
+                            <button
+                              onClick={() =>
+                                dispatch({
+                                  type: "DELETE_PLAYLIST",
+                                  payload: playlist.name,
+                                })
+                              }
+                            >
+                              Delete
+                            </button>
+                          </li>
+                        );
+                      })
+                    : "No Playlists Found"}
+                </div>
               </div>
             )}
             <button
+              className="single-video-tools-button"
               onClick={() => {
                 setNotesWindow(() => ({
                   ...notesWindow,
