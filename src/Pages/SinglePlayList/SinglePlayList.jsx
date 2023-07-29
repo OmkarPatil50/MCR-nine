@@ -19,8 +19,8 @@ function SinglePlayList() {
   return (
     <div className="main-page">
       <h3 className="page-heading">{name}</h3>
-      <section className="categories-section">
-        <ul className="categories-list">
+      <section className="videos-section">
+        <ul className="videos-list">
           {videos?.map((video) => {
             return (
               <li id={video._id}>

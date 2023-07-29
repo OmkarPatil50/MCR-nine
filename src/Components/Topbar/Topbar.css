@@ -10,6 +10,7 @@
   height: 60px;
   align-items: center;
   padding: 10px;
+  z-index: 1;
 }
 
 .top-bar-left {

@@ -14,8 +14,8 @@ function Explore() {
   return (
     <div className="main-page">
       <h3 className="page-heading">All Videos</h3>
-      <section className="categories-section">
-        <ul className="categories-list">
+      <section className="videos-section">
+        <ul className="videos-list">
           {state.exploreList?.map((video) => {
             return (
               <li id={video._id}>

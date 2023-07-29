@@ -1,5 +1,15 @@
+
 .main-page {
-  position: relative;
+  position: absolute;
   top: 60px;
   left: 300px;
+}
+
+.page-heading {
+  font-size: 24px;
+}
+
+.videos-list {
+  display: flex;
+  flex-wrap: wrap;
 }

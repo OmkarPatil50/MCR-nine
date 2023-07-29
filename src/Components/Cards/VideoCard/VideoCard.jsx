@@ -14,13 +14,18 @@ function VideoCard({ videoData }) {
     <div className="video-card">
       <header className="video-card-header">
         <Link to={`/videos/${_id}`}>
-          <img src={thumbnail} alt="video-card" />
+          <img
+            src={thumbnail}
+            alt="video-card"
+            className="video-card-thumbnail"
+          />
         </Link>
         {isAddedToWatchLater(_id) ? (
           <button
             onClick={() =>
               dispatch({ type: "REMOVE_FROM_WATCH_LATER", payload: _id })
             }
+            className="btn-watch-later"
           >
             <i className="fa-solid fa-clock"></i>
           </button>
@@ -29,6 +34,7 @@ function VideoCard({ videoData }) {
             onClick={() =>
               dispatch({ type: "ADD_TO_WATCH_LATER", payload: _id })
             }
+            className="btn-watch-later"
           >
             <i className="fa-solid fa-clock-rotate-left"></i>
           </button>
@@ -44,8 +50,9 @@ function VideoCard({ videoData }) {
                 },
               })
             }
+            className="btn-delete-from-playlist"
           >
-            <i className="fa-solid fa-xmark"></i>
+            <i className="fa-solid fa-trash"></i>
           </button>
         )}
       </header>
@@ -56,9 +63,11 @@ function VideoCard({ videoData }) {
           className="video-thumbnail-small"
         />
         <div className="video-info">
-          <h3>{title}</h3>
-          <h3>{category}</h3>
-          <p>{`${views} Views | ${creator}`}</p>
+          <div>
+            <h3 className="video-card-name">{title}</h3>
+            <h3 className="video-card-category">{category}</h3>
+          </div>
+          <p className="video-card-views">{`${views} Views | ${creator}`}</p>
         </div>
       </Link>
     </div>

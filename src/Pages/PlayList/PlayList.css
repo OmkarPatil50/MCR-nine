@@ -109,15 +109,85 @@
   --yt-spec-filled-button-text: #030303;
   --yt-spec-selected-nav-text: #fff;
 }
-
-body {
-  background-color: var(--yt-spec-general-background-c);
-  color: var(--secondary-color);
-  font-family: Roboto, Arial, sans-serif;
+.btn-new-playlist {
+  border-radius: 50%;
+  border: none;
+  background: none;
+  color: var(--yt-spec-text-primary);
+  cursor: pointer;
 }
 
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.btn-new-playlist i {
+  padding: 15px;
+  font-size: 30px;
+}
+
+.add-new-playlist-box {
+  position: fixed;
+}
+
+.modal-page {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: hsla(0, 3%, 24%, 0.726);
+  z-index: 1;
+}
+
+.modal-box {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--lynx-white-color);
+  padding: 20px 40px;
+  width: 400px;
+}
+
+.modal-box label textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: var(--primary-color);
+  border: none;
+  font-family: var(--font);
+}
+.modal-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header i {
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+.modal-heading {
+  color: var(--primary-color);
+  margin: 10px 0 20px;
+}
+
+.modal-save-btn {
+  box-sizing: border-box;
+  margin: 10px;
+  padding: 7.5px 15px;
+  background: none;
+  border: none;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  cursor: pointer;
+  border: 1px solid var(--primary-color);
+}
+
+.modal-save-btn:hover {
+  opacity: 0.45;
 }

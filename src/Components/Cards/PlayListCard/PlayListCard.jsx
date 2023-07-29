@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AppContext } from "../..";
+import { AppContext } from "../../..";
+import "./PlayListCard.css";
 
 function PlayListCard({ playlist }) {
   const { state, dispatch } = useContext(AppContext);
@@ -17,18 +18,23 @@ function PlayListCard({ playlist }) {
               payload: name,
             })
           }
+          className="btn-delete"
         >
-          <i className="fa-solid fa-xmark"></i>
+          <i className="fa-solid fa-trash"></i>
         </button>
         <header className="playlist-card-header">
           <Link to={`/playlist/${name}`}>
-            <img src={thumbnail} alt="playlist-card" />
+            <img
+              src={thumbnail}
+              alt="playlist-card"
+              className="playlist-thumbnail"
+            />
           </Link>
         </header>
         <Link to={`/playlist/${name}`} className="video-details">
           <div className="video-info">
-            <h3>{name}</h3>
-            <p>{desc}</p>
+            <h3 className="playlist-card-name">{name}</h3>
+            <p className="playlist-card-category">{desc}</p>
           </div>
         </Link>
       </div>

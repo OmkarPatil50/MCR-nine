@@ -8,8 +8,8 @@ function VideosList() {
   return (
     <div className="main-page">
       <h3 className="page-heading">{state.filterByCategory}</h3>
-      <section className="categories-section">
-        <ul className="categories-list">
+      <section className="videos-section">
+        <ul className="videos-list">
           {state.filteredList?.map((video) => {
             return (
               <li id={video._id}>

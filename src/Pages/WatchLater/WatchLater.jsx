@@ -9,8 +9,8 @@ function WatchLater() {
   return (
     <div className="main-page">
       <h3 className="page-heading">Watch Later</h3>
-      <section className="categories-section">
-        <ul className="categories-list">
+      <section className="videos-section">
+        <ul className="videos-list">
           {state.watchLaterList?.map((video) => {
             return (
               <li id={video._id}>

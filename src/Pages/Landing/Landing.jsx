@@ -10,8 +10,8 @@ function Landing() {
   return (
     <div className="main-page">
       <h3 className="page-heading">Categories</h3>
-      <section className="categories-section">
-        <ul className="categories-list">
+      <section className="videos-section">
+        <ul className="videos-list">
           {state.categoriesList?.map((category) => {
             return (
               <Link
@@ -23,6 +23,7 @@ function Landing() {
                     payload: category.category,
                   });
                 }}
+                className="category-card"
               >
                 <CategoriesCard categoryItem={category} />
               </Link>
