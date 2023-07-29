@@ -1,0 +1,107 @@
+.top-bar {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--yt-spec-general-background-c);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  align-items: center;
+  padding: 10px;
+}
+
+.top-bar-left {
+  display: flex;
+  align-items: center;
+}
+
+.top-bar-app-info {
+  display: flex;
+  align-items: center;
+}
+
+.fa-bars {
+  padding: 10px;
+  margin: 10px;
+  font-size: 26px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.fa-bars:hover {
+  background-color: var(--yt-spec-static-brand-black);
+}
+
+.top-bar-app-info i {
+  font-size: 40px;
+  color: var(--yt-spec-static-brand-red);
+}
+
+.top-bar-app-name {
+  margin: 0 10px;
+  font-weight: 100;
+  font-size: 21px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  flex-basis: 550px;
+  border: 1px solid var(--yt-spec-menu-background);
+  padding: 0 0 0 15px;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: var(--yt-spec-general-background-b);
+}
+
+.search-bar-input {
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 16px;
+  color: var(--yt-spec-text-primary);
+  border: 1px solid var(--yt-spec-general-background-b);
+  background-color: var(--yt-spec-general-background-b);
+}
+.search-bar-input:focus {
+  outline: none;
+}
+
+.search-bar-btn {
+  box-sizing: border-box;
+  display: flex;
+  padding: 11px 25px;
+  font-size: 18px;
+  background-color: var(--yt-spec-brand-background-solid);
+  color: var(--yt-spec-text-secondary);
+  margin: 0;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-bar-btn i {
+  padding: 0;
+}
+
+.sign-in-btn-top-bar {
+  box-sizing: border-box;
+  border: 1px solid var(--yt-spec-static-grey);
+  background: transparent;
+  color: var(--yt-spec-call-to-action);
+  padding: 7.5px 15px;
+  border-radius: 20px;
+  font-weight: var(--light-weight);
+  font-size: 15px;
+  margin: 0 20px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.sign-in-btn-top-bar i {
+  font-size: 18px;
+  margin: 0 5px 0 0;
+}

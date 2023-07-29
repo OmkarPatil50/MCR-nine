@@ -110,13 +110,88 @@
   --yt-spec-selected-nav-text: #fff;
 }
 
-body {
-  background-color: var(--yt-spec-general-background-c);
-  color: var(--secondary-color);
-  font-family: Roboto, Arial, sans-serif;
+.navbar {
+  box-sizing: border-box;
+  background: transparent;
+  position: fixed;
+  top: 50px;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 275px;
 }
 
-ul {
-  margin: 0;
-  padding: 0;
+.nav-section {
+  height: 100vh;
+  overflow: scroll;
+  box-sizing: border-box;
+  transition-duration: 2s;
+}
+
+.nav-item {
+  box-sizing: border-box;
+  font-size: 15px;
+  color: var(--yt-spec-text-primary);
+  text-decoration: none;
+  font-weight: 100;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-item:hover {
+  background-color: var(--yt-spec-static-brand-black);
+  border-radius: 10px;
+}
+
+.nav-item i {
+  box-sizing: border-box;
+  width: 20px;
+}
+
+.nav-item p {
+  margin: 0 20px 0;
+}
+
+.active {
+  background-color: var(--yt-spec-static-brand-black);
+  border-radius: 10px;
+}
+
+.nav-items-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--yt-spec-menu-background);
+}
+
+.nav-items-section-heading {
+  padding: 0 10px;
+  margin: 5px 0 10px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sign-in-tag {
+  padding: 17.5px 7.5px;
+  font-size: 15px;
+}
+.sign-in-tag button {
+  margin: 0 10px;
+}
+
+.fa-plus,
+.fa-exclamation {
+  border: 1px solid var(--yt-spec-text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5px;
+  border-radius: 50%;
+}
+
+.sign-in-btn-nav {
+  width: 50%;
 }
