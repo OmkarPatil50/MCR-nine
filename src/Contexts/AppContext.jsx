@@ -220,7 +220,16 @@ function AppContextProvider({ children }) {
     searchText: "",
     filterByCategory: "",
   };
-  const [state, dispatch] = useReducer(reducerFunction, initialValue);
+
+  const initialize = localStorage.getItem("appState");
+
+  const initializeState = initialize ? JSON.parse(initialize) : initialValue;
+
+  const [state, dispatch] = useReducer(reducerFunction, initializeState);
+
+  useEffect(() => {
+    localStorage.setItem("appState", JSON.stringify(state));
+  }, [state]);
 
   useEffect(() => {
     let data = [...state.videosData];
